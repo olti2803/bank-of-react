@@ -6,6 +6,7 @@ import UserProfile from "./components/UserProfile";
 import Login from "./components/Login";
 import Credits from "./components/Credits";
 import Debits from "./components/Debits";
+import Navbar from "./components/Navbar";
 
 function App() {
   const [accountBalance, setAccountBalance] = useState(0);
@@ -103,6 +104,7 @@ function App() {
 
   return (
     <Router>
+      <Navbar />
       <Routes>
         <Route
           exact

@@ -1,0 +1,30 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #004080; /* Dark blue background */
+  color: white;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  margin: 0 1rem;
+}
+
+.nav-links .active {
+  font-weight: bold;
+  border-bottom: 2px solid white;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .navbar h1 {
+    font-size: 1.2rem;
+  }
+  .nav-links a {
+    font-size: 0.9rem;
+    margin: 0 0.5rem;
+  }
+}
