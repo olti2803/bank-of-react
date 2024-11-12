@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import axios from "axios";
 import Home from "./components/Home";
 import UserProfile from "./components/UserProfile";
 import Login from "./components/Login";
@@ -12,29 +13,41 @@ function App() {
   const [debits, setDebits] = useState([]);
 
   useEffect(() => {
-    // Placeholder for future API calls to fetch credits and debits
-    const mockCredits = [
-      { description: "Credit 1", amount: 100, date: "2023-01-01" },
-      { description: "Credit 2", amount: 200, date: "2023-02-01" },
-    ];
-    const mockDebits = [
-      { description: "Debit 1", amount: 50, date: "2023-01-15" },
-      { description: "Debit 2", amount: 75, date: "2023-02-10" },
-    ];
-    setCredits(mockCredits);
-    setDebits(mockDebits);
+    const fetchCredits = async () => {
+      try {
+        const response = await axios.get(
+          "https://johnnylaicode.github.io/api/credits.json"
+        );
+        setCredits(response.data);
+      } catch (error) {
+        console.error("Error fetching credits:", error);
+      }
+    };
 
+    const fetchDebits = async () => {
+      try {
+        const response = await axios.get(
+          "https://johnnylaicode.github.io/api/debits.json"
+        );
+        setDebits(response.data);
+      } catch (error) {
+        console.error("Error fetching debits:", error);
+      }
+    };
+
+    fetchCredits();
+    fetchDebits();
+  }, []);
+
+  useEffect(() => {
     // Calculate account balance based on credits and debits
-    const totalCredits = mockCredits.reduce(
+    const totalCredits = credits.reduce(
       (sum, credit) => sum + credit.amount,
       0
     );
-    const totalDebits = mockDebits.reduce(
-      (sum, debit) => sum + debit.amount,
-      0
-    );
+    const totalDebits = debits.reduce((sum, debit) => sum + debit.amount, 0);
     setAccountBalance(totalCredits - totalDebits);
-  }, []);
+  }, [credits, debits]);
 
   return (
     <Router>
