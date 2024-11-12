@@ -2,10 +2,16 @@ import React from "react";
 
 function UserProfile({ userName, memberSince }) {
   return (
-    <div>
+    <div className="profile-container">
       <h1>User Profile</h1>
-      <p>Username: {userName}</p>
-      <p>Member Since: {memberSince}</p>
+      <div className="profile-info">
+        <p>
+          <strong>Username:</strong> {userName}
+        </p>
+        <p>
+          <strong>Member Since:</strong> {memberSince}
+        </p>
+      </div>
     </div>
   );
 }

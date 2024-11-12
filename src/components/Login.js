@@ -12,9 +12,9 @@ function Login({ mockLogIn }) {
   };
 
   return (
-    <div>
+    <div className="login-container">
       <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="login-form">
         <label>
           Username:
           <input
@@ -23,7 +23,6 @@ function Login({ mockLogIn }) {
             onChange={(e) => setUserName(e.target.value)}
           />
         </label>
-        <br />
         <button type="submit">Log In</button>
       </form>
     </div>

@@ -12,17 +12,20 @@ function Debits({ debits, addDebit }) {
   };
 
   return (
-    <div>
+    <div className="debits-container">
       <h1>Debits</h1>
-      <ul>
+      <ul className="debits-list">
         {debits.map((debit, index) => (
-          <li key={index}>
-            {debit.description} - ${debit.amount.toFixed(2)} on{" "}
-            {new Date(debit.date).toLocaleDateString()}
+          <li key={index} className="debit-item">
+            <span className="debit-description">{debit.description}</span>
+            <span className="debit-amount">-${debit.amount.toFixed(2)}</span>
+            <span className="debit-date">
+              {new Date(debit.date).toLocaleDateString()}
+            </span>
           </li>
         ))}
       </ul>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="debit-form">
         <input
           type="text"
           placeholder="Description"

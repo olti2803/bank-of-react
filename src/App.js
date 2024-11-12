@@ -89,14 +89,34 @@ function App() {
   }, [credits, debits]);
 
   const addCredit = (description, amount) => {
-    const newCredit = { description, amount, date: new Date().toISOString() };
+    if (!description || isNaN(amount) || amount === "") {
+      alert("Please provide a valid description and amount.");
+      return;
+    }
+
+    const newCredit = {
+      description,
+      amount: parseFloat(amount).toFixed(2),
+      date: new Date().toISOString(),
+    };
+
     const updatedCredits = [...credits, newCredit];
     setCredits(updatedCredits);
     localStorage.setItem("credits", JSON.stringify(updatedCredits));
   };
 
   const addDebit = (description, amount) => {
-    const newDebit = { description, amount, date: new Date().toISOString() };
+    if (!description || isNaN(amount) || amount === "") {
+      alert("Please provide a valid description and amount.");
+      return;
+    }
+
+    const newDebit = {
+      description,
+      amount: parseFloat(amount).toFixed(2),
+      date: new Date().toISOString(),
+    };
+
     const updatedDebits = [...debits, newDebit];
     setDebits(updatedDebits);
     localStorage.setItem("debits", JSON.stringify(updatedDebits));
