@@ -11,12 +11,34 @@ function App() {
   const [accountBalance, setAccountBalance] = useState(0);
   const [credits, setCredits] = useState([]);
   const [debits, setDebits] = useState([]);
-  const [currentUser] = useState({
+  const [currentUser, setCurrentUser] = useState({
     userName: "Joe Smith",
     memberSince: "11/22/99",
   });
 
-  // Load data from local storage or fetch from API
+  const mockLogIn = (userName) => {
+    const storedUser = JSON.parse(localStorage.getItem("currentUser"));
+    const newUser = {
+      userName: userName,
+      memberSince: storedUser
+        ? storedUser.memberSince
+        : new Date().toLocaleDateString("en-US", {
+            year: "2-digit",
+            month: "2-digit",
+            day: "2-digit",
+          }),
+    };
+    setCurrentUser(newUser);
+    localStorage.setItem("currentUser", JSON.stringify(newUser));
+  };
+
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("currentUser"));
+    if (storedUser) {
+      setCurrentUser(storedUser);
+    }
+  }, []);
+
   useEffect(() => {
     const loadCredits = async () => {
       const storedCredits = JSON.parse(localStorage.getItem("credits"));
@@ -28,7 +50,7 @@ function App() {
             "https://johnnylaicode.github.io/api/credits.json"
           );
           setCredits(response.data);
-          localStorage.setItem("credits", JSON.stringify(response.data)); // Save to local storage
+          localStorage.setItem("credits", JSON.stringify(response.data));
         } catch (error) {
           console.error("Error fetching credits:", error);
         }
@@ -45,7 +67,7 @@ function App() {
             "https://johnnylaicode.github.io/api/debits.json"
           );
           setDebits(response.data);
-          localStorage.setItem("debits", JSON.stringify(response.data)); // Save to local storage
+          localStorage.setItem("debits", JSON.stringify(response.data));
         } catch (error) {
           console.error("Error fetching debits:", error);
         }
@@ -56,7 +78,6 @@ function App() {
     loadDebits();
   }, []);
 
-  // Update account balance whenever credits or debits change
   useEffect(() => {
     const totalCredits = credits.reduce(
       (sum, credit) => sum + credit.amount,
@@ -66,20 +87,18 @@ function App() {
     setAccountBalance(totalCredits - totalDebits);
   }, [credits, debits]);
 
-  // Function to add a new credit and save to local storage
   const addCredit = (description, amount) => {
     const newCredit = { description, amount, date: new Date().toISOString() };
     const updatedCredits = [...credits, newCredit];
     setCredits(updatedCredits);
-    localStorage.setItem("credits", JSON.stringify(updatedCredits)); // Update local storage
+    localStorage.setItem("credits", JSON.stringify(updatedCredits));
   };
 
-  // Function to add a new debit and save to local storage
   const addDebit = (description, amount) => {
     const newDebit = { description, amount, date: new Date().toISOString() };
     const updatedDebits = [...debits, newDebit];
     setDebits(updatedDebits);
-    localStorage.setItem("debits", JSON.stringify(updatedDebits)); // Update local storage
+    localStorage.setItem("debits", JSON.stringify(updatedDebits));
   };
 
   return (
@@ -99,7 +118,7 @@ function App() {
             />
           }
         />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login mockLogIn={mockLogIn} />} />
         <Route
           path="/credits"
           element={<Credits credits={credits} addCredit={addCredit} />}

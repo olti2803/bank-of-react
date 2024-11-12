@@ -1,12 +1,14 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function Login() {
+function Login({ mockLogIn }) {
   const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("User logged in:", userName);
+    mockLogIn(userName); // Update the current user in App.js
+    navigate("/userProfile"); // Redirect to User Profile page
   };
 
   return (
@@ -19,15 +21,6 @@ function Login() {
             type="text"
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
-          />
-        </label>
-        <br />
-        <label>
-          Password:
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
           />
         </label>
         <br />
