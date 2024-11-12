@@ -11,6 +11,10 @@ function App() {
   const [accountBalance, setAccountBalance] = useState(0);
   const [credits, setCredits] = useState([]);
   const [debits, setDebits] = useState([]);
+  const [currentUser] = useState({
+    userName: "Joe Smith",
+    memberSince: "11/22/99",
+  });
 
   // Load data from local storage or fetch from API
   useEffect(() => {
@@ -86,7 +90,15 @@ function App() {
           path="/"
           element={<Home accountBalance={accountBalance} />}
         />
-        <Route path="/userProfile" element={<UserProfile />} />
+        <Route
+          path="/userProfile"
+          element={
+            <UserProfile
+              userName={currentUser.userName}
+              memberSince={currentUser.memberSince}
+            />
+          }
+        />
         <Route path="/login" element={<Login />} />
         <Route
           path="/credits"
