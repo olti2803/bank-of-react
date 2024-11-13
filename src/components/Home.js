@@ -36,7 +36,11 @@ function Home({ accountBalance, credits = [], debits = [] }) {
   return (
     <div className="home-container">
       <div className="header-with-flag">
-        <img src="/flag.png" alt="USA flag" className="flag-icon" />
+        <img
+          src={`${process.env.PUBLIC_URL}/flag.png`}
+          alt="USA flag"
+          className="flag-icon"
+        />
         <h1 className="home-title">Welcome to Bank of React</h1>
       </div>
 

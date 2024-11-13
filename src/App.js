@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import axios from "axios";
 import Home from "./components/Home";
 import UserProfile from "./components/UserProfile";
@@ -123,7 +128,7 @@ function App() {
   };
 
   return (
-    <Router>
+    <Router basename="/bank-of-react">
       <Navbar />
       <Routes>
         <Route
@@ -137,7 +142,6 @@ function App() {
             />
           }
         />
-
         <Route
           path="/userProfile"
           element={
@@ -156,6 +160,8 @@ function App() {
           path="/debits"
           element={<Debits debits={debits} addDebit={addDebit} />}
         />
+        <Route path="*" element={<Navigate to="/" />} />{" "}
+        {/* Redirect all other paths to Home */}
       </Routes>
     </Router>
   );
