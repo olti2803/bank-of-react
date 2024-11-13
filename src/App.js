@@ -88,6 +88,8 @@ function App() {
     setAccountBalance(totalCredits - totalDebits);
   }, [credits, debits]);
 
+  ////////////////////////////////
+
   const addCredit = (description, amount) => {
     if (!description || isNaN(amount) || amount === "") {
       alert("Please provide a valid description and amount.");
@@ -96,7 +98,7 @@ function App() {
 
     const newCredit = {
       description,
-      amount: parseFloat(amount).toFixed(2),
+      amount: parseFloat(amount), // Ensure amount is stored as a number
       date: new Date().toISOString(),
     };
 
@@ -113,7 +115,7 @@ function App() {
 
     const newDebit = {
       description,
-      amount: parseFloat(amount).toFixed(2),
+      amount: parseFloat(amount), // Ensure amount is stored as a number
       date: new Date().toISOString(),
     };
 
@@ -121,6 +123,8 @@ function App() {
     setDebits(updatedDebits);
     localStorage.setItem("debits", JSON.stringify(updatedDebits));
   };
+
+  ////////////////////////////////
 
   return (
     <Router>

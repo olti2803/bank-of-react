@@ -361,3 +361,11 @@ body {
   height: 24px;
   border-radius: 4px;
 }
+
+.action-link {
+  text-decoration: none;
+}
+
+.action-link .action-button {
+  text-decoration: none;
+}

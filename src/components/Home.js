@@ -1,7 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { DollarSign, CreditCard, PiggyBank, ArrowUpRight } from "lucide-react";
 
 function Home({ accountBalance }) {
+  // const clearLocalStorage = () => {
+  //   localStorage.clear();
+  //   window.location.reload(); // Reload to reset app state after clearing
+  //   alert("Local storage has been cleared!");
+  // };
   return (
     <div className="home-container">
       <div className="header-with-flag">
@@ -51,18 +57,28 @@ function Home({ accountBalance }) {
         </p>
 
         <div className="action-buttons">
-          <button className="action-button">
-            <CreditCard className="button-icon" /> View Credits
-          </button>
-          <button className="action-button">
-            <DollarSign className="button-icon" /> View Debits
-          </button>
-          <button className="action-button">
-            <ArrowUpRight className="button-icon" /> Transfer Money
-          </button>
+          <Link to="/credits" className="action-link">
+            <button className="action-button">
+              <CreditCard className="button-icon" /> View Credits
+            </button>
+          </Link>
+          <Link to="/debits" className="action-link">
+            <button className="action-button">
+              <DollarSign className="button-icon" /> View Debits
+            </button>
+          </Link>
+          <Link to="/userProfile" className="action-link">
+            <button className="action-button">
+              <ArrowUpRight className="button-icon" /> User Profile
+            </button>
+          </Link>
           <button className="action-button">
             <PiggyBank className="button-icon" /> Set Savings Goal
           </button>
+
+          {/* <button className="clear-storage-button" onClick={clearLocalStorage}>
+            Clear Local Storage
+          </button> */}
         </div>
       </div>
     </div>

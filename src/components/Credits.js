@@ -18,7 +18,12 @@ function Credits({ credits, addCredit }) {
         {credits.map((credit, index) => (
           <li key={index} className="credit-item">
             <span className="credit-description">{credit.description}</span>
-            <span className="credit-amount">${credit.amount.toFixed(2)}</span>
+            <span className="credit-amount">
+              $
+              {typeof credit.amount === "number"
+                ? credit.amount.toFixed(2)
+                : parseFloat(credit.amount).toFixed(2)}
+            </span>
             <span className="credit-date">
               {new Date(credit.date).toLocaleDateString()}
             </span>
