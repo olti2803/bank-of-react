@@ -88,8 +88,6 @@ function App() {
     setAccountBalance(totalCredits - totalDebits);
   }, [credits, debits]);
 
-  ////////////////////////////////
-
   const addCredit = (description, amount) => {
     if (!description || isNaN(amount) || amount === "") {
       alert("Please provide a valid description and amount.");
@@ -98,7 +96,7 @@ function App() {
 
     const newCredit = {
       description,
-      amount: parseFloat(amount), // Ensure amount is stored as a number
+      amount: parseFloat(amount),
       date: new Date().toISOString(),
     };
 
@@ -115,7 +113,7 @@ function App() {
 
     const newDebit = {
       description,
-      amount: parseFloat(amount), // Ensure amount is stored as a number
+      amount: parseFloat(amount),
       date: new Date().toISOString(),
     };
 
@@ -124,8 +122,6 @@ function App() {
     localStorage.setItem("debits", JSON.stringify(updatedDebits));
   };
 
-  ////////////////////////////////
-
   return (
     <Router>
       <Navbar />
@@ -133,8 +129,15 @@ function App() {
         <Route
           exact
           path="/"
-          element={<Home accountBalance={accountBalance} />}
+          element={
+            <Home
+              accountBalance={accountBalance}
+              credits={credits}
+              debits={debits}
+            />
+          }
         />
+
         <Route
           path="/userProfile"
           element={
