@@ -12,17 +12,25 @@ function Credits({ credits, addCredit }) {
   };
 
   return (
-    <div>
+    <div className="credits-container">
       <h1>Credits</h1>
-      <ul>
+      <ul className="credits-list">
         {credits.map((credit, index) => (
-          <li key={index}>
-            {credit.description} - ${credit.amount.toFixed(2)} on{" "}
-            {new Date(credit.date).toLocaleDateString()}
+          <li key={index} className="credit-item">
+            <span className="credit-description">{credit.description}</span>
+            <span className="credit-amount">
+              $
+              {typeof credit.amount === "number"
+                ? credit.amount.toFixed(2)
+                : parseFloat(credit.amount).toFixed(2)}
+            </span>
+            <span className="credit-date">
+              {new Date(credit.date).toLocaleDateString()}
+            </span>
           </li>
         ))}
       </ul>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="credit-form">
         <input
           type="text"
           placeholder="Description"

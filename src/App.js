@@ -6,6 +6,7 @@ import UserProfile from "./components/UserProfile";
 import Login from "./components/Login";
 import Credits from "./components/Credits";
 import Debits from "./components/Debits";
+import Navbar from "./components/Navbar";
 
 function App() {
   const [accountBalance, setAccountBalance] = useState(0);
@@ -88,14 +89,34 @@ function App() {
   }, [credits, debits]);
 
   const addCredit = (description, amount) => {
-    const newCredit = { description, amount, date: new Date().toISOString() };
+    if (!description || isNaN(amount) || amount === "") {
+      alert("Please provide a valid description and amount.");
+      return;
+    }
+
+    const newCredit = {
+      description,
+      amount: parseFloat(amount),
+      date: new Date().toISOString(),
+    };
+
     const updatedCredits = [...credits, newCredit];
     setCredits(updatedCredits);
     localStorage.setItem("credits", JSON.stringify(updatedCredits));
   };
 
   const addDebit = (description, amount) => {
-    const newDebit = { description, amount, date: new Date().toISOString() };
+    if (!description || isNaN(amount) || amount === "") {
+      alert("Please provide a valid description and amount.");
+      return;
+    }
+
+    const newDebit = {
+      description,
+      amount: parseFloat(amount),
+      date: new Date().toISOString(),
+    };
+
     const updatedDebits = [...debits, newDebit];
     setDebits(updatedDebits);
     localStorage.setItem("debits", JSON.stringify(updatedDebits));
@@ -103,12 +124,20 @@ function App() {
 
   return (
     <Router>
+      <Navbar />
       <Routes>
         <Route
           exact
           path="/"
-          element={<Home accountBalance={accountBalance} />}
+          element={
+            <Home
+              accountBalance={accountBalance}
+              credits={credits}
+              debits={debits}
+            />
+          }
         />
+
         <Route
           path="/userProfile"
           element={
