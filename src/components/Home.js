@@ -18,11 +18,11 @@ function Home({ accountBalance, credits = [], debits = [] }) {
     }
   }, [savingsGoal]);
 
-  const clearLocalStorage = () => {
-    localStorage.clear();
-    window.location.reload();
-    alert("Local storage has been cleared!");
-  };
+  // const clearLocalStorage = () => {
+  //   localStorage.clear();
+  //   window.location.reload();
+  //   alert("Local storage has been cleared!");
+  // };
 
   const handleSetSavingsGoal = () => {
     setSavingsGoal(parseFloat(newSavingsGoal));
@@ -126,9 +126,9 @@ function Home({ accountBalance, credits = [], debits = [] }) {
             <PiggyBank className="button-icon" /> Set Savings Goal
           </button>
 
-          <button className="clear-storage-button" onClick={clearLocalStorage}>
+          {/* <button className="clear-storage-button" onClick={clearLocalStorage}>
             Clear Local Storage
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
