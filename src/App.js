@@ -133,7 +133,7 @@ function App() {
       <Routes>
         <Route
           exact
-          path="/"
+          path=""
           element={
             <Home
               accountBalance={accountBalance}
@@ -143,7 +143,7 @@ function App() {
           }
         />
         <Route
-          path="/userProfile"
+          path="userProfile"
           element={
             <UserProfile
               userName={currentUser.userName}
@@ -151,17 +151,16 @@ function App() {
             />
           }
         />
-        <Route path="/login" element={<Login mockLogIn={mockLogIn} />} />
+        <Route path="login" element={<Login mockLogIn={mockLogIn} />} />
         <Route
-          path="/credits"
+          path="credits"
           element={<Credits credits={credits} addCredit={addCredit} />}
         />
         <Route
-          path="/debits"
+          path="debits"
           element={<Debits debits={debits} addDebit={addDebit} />}
         />
-        <Route path="*" element={<Navigate to="/" />} />{" "}
-        {/* Redirect all other paths to Home */}
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
   );
